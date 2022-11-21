@@ -4,13 +4,29 @@ This is a working progress webapp that allow restaurant managers to manage their
 
 **Current Issue Log:**
 
-<iframe class="airtable-embed" src="https://airtable.com/embed/shrlnPtNhWFYlSDxb?backgroundColor=cyanLight&layout=card&viewControls=on" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
+Check [here](https://airtable.com/shrXsF5MPsCPM8H63) in real time.
+
+Resume:
+
+- Setup React project
+  - Setup authentication (BASIC yet) component
+  - Setup daily report component
+- Setup Serverless functions as backend
+  - Setup Users functions
+  - Setup daily report functions
+- Setup database
+  - Setup User table
+  - Setup Daily Report table
+- Setup netlify
+  - Deploy dev
+  - Deploy prod
 
 **Next features to implement:**
 
 - Ability to add calendars with shifts report
   - Admins can assign all "staff"(users - role) to a specific shift and do a week schedule view
   - Staff should only be able to view the next X schedules referent to the restaurant who is assign
+- ... 🚀
 
 ## Available Scripts
 
