@@ -58,7 +58,10 @@ You will also see any lint errors in the console.
 
 - [ ] TODO - Describe also state and effect workflows
 
-
 ## Final notes
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+---
+
+<p align="center"><a>MIT License</a> - Copyright (c) 2022 Bruno Vilar</p>
