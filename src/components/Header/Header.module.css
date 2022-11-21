@@ -1,0 +1,37 @@
+.appHeader {
+    background-color: #191E29;
+    height:20vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    font-size: calc(8px + 2vmin);
+    color: #01C38D;
+    padding: 0% 0.5% 0% 0.5%
+}
+  
+.headerLogo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 33%;
+}
+  
+.headerRoutes{
+    margin-left: 5%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 66%;
+    font-size: calc(8px + 1.1vmin);
+    color: #ffffff;
+}
+
+
+/* label:hover, label:focus, label:active, label:visited{
+    color: #01C38D;
+    /* text-decoration: 2px underline white; */
+    /* border-bottom: 2px solid #01C38D;
+    padding-bottom: 15%; */
+/* } */
