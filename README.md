@@ -1,46 +1,48 @@
-# Getting Started with Create React App
+# Restaurant Reports WebApp
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a working progress webapp that allow restaurant managers to manage their daily cash flow across different daily reports.
+
+**Current Issue Log:**
+
+<iframe class="airtable-embed" src="https://airtable.com/embed/shrlnPtNhWFYlSDxb?backgroundColor=cyanLight&layout=card&viewControls=on" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
+
+**Next features to implement:**
+
+- Ability to add calendars with shifts report
+  - Admins can assign all "staff"(users - role) to a specific shift and do a week schedule view
+  - Staff should only be able to view the next X schedules referent to the restaurant who is assign
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `yarn start`
+### `netlify dev`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+**Launch full stack app:**
+
+- REACT as frontend
+- Typescript as serverless functions working as backend
+- Airtable as database
+
+Runs the app in the development mode, locally.\
+Open [http://localhost:8888](http://localhost:8888) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `yarn test`
+## CI / CD and Infra
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [ ] TODO
 
-### `yarn build`
+## Backend - Serverless Functions Describe
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- [ ] TODO
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Frontend - Describe react components
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- [ ] TODO - Describe also state and effect workflows
 
-### `yarn eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Final notes
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
