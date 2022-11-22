@@ -1,5 +1,7 @@
 # Restaurant Reports WebApp
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/53b519c3-00a4-46cd-984f-14f89dad89f9/deploy-status)](https://app.netlify.com/sites/restaurant-reports-bpvcode/deploys)
+
 This is a working progress webapp that allow restaurant managers to manage their daily cash flow across different daily reports.
 
 **Current Issue Log:**
