@@ -20,16 +20,17 @@ const Clock: FC<clockProps> = ({onSetShift}) => {
 
 
     useEffect(() => {
-        const intervalMin = setInterval(() => setMin(new Date().getMinutes()), 1000);
-        const intervalHour = setInterval(() => setHour(new Date().getHours()), 1000);
-        const intervalShift = setInterval(() => setShift(getShift(new Date())), 1000)
-        onSetShift(getShift(new Date()))
+        setDate(new Date())
+        const intervalMin = setInterval(() => setMin(date.getMinutes()), 1000);
+        const intervalHour = setInterval(() => setHour(date.getHours()), 1000);
+        const intervalShift = setInterval(() => setShift(getShift(date)), 1000)
+        onSetShift(getShift(date))
         return () => {
             clearInterval(intervalMin);
             clearInterval(intervalHour);
             clearInterval(intervalShift);
         };
-      }, []);
+      }, [onSetShift]);
 
     useEffect(() => {
         const allWeekday = new Array(7);

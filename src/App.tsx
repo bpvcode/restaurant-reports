@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
 import './App.css';
+import { useState } from 'react';
 import Authentication from './components/Authentication/Authentication';
 import { UserModal } from './components/Authentication/SignIn';
 import DailyReports from './components/DailyReports/DailyReports';
 import Header from './components/Header/Header';
-import ErrorModal from './components/UI/ErrorModal/ErrorModal';
 
 const App = () => {
 
@@ -16,7 +15,6 @@ const App = () => {
   }
 
   const onGetNewUser = (event: any) => {
-    console.log("APP " , event)
     setUser(event)
     setSelectedRestaurant(event.selectedRestaurant)
   }

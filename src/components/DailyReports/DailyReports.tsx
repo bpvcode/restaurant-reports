@@ -46,7 +46,7 @@ const DailyReports: FC<DailyReportsProps> = ({selectedRestaurant}) => {
         setLunchCreatedTime(dailyLunch.createdTime)
         const report = {
             shift: shift,
-            numeroRefeicoes: dailyLunch.numeroRefeicoes,
+            numeroRefeicoes: lunchTotalRefeicoes,
             caixa: dailyLunch.caixa,
             multibanco: dailyLunch.multibanco,
             responsavel: dailyLunch.responsavel,
