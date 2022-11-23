@@ -5,6 +5,7 @@ import { Restaurants, Roles } from "./RolesEnum";
 import { Select, Option } from  "@material-tailwind/react"
 import USERS_MOCK_DATA from './USERS_MOCK_DATA.json'
 import ErrorModal from "../UI/ErrorModal/ErrorModal";
+import axios from "axios";
 
 export interface UserModal {
     id: string,
@@ -61,7 +62,6 @@ const SignIn: FC <UserProps> = ({onSignIn}) => {
         }
     }
 
-
     const onSubmitHandler = (event: any) => {
         event.preventDefault();
         verifyUser(name, password, restaurant as Restaurants)
@@ -73,6 +73,7 @@ const SignIn: FC <UserProps> = ({onSignIn}) => {
     const onIsErrorHandler = (isError: boolean) => {
         setIsError(isError)
     }
+
 
     return (
         <>
