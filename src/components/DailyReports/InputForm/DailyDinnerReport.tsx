@@ -124,13 +124,10 @@ const DailyDinnerReport: FC<DailyDinnerReportProps> = ({lunchTotalRefeicoes, lun
             finalReport: finalReport,
             restaurant: '' as Restaurants
         }
-        console.log("##### New Daily Report - ", newDailyReport)
         setFinalReport(finalReport)
         dailyReport(newDailyReport)
         isDailyReportDone(true)
     }
-
-    console.log("##### Final Report - ", finalReport)
 
     return (
         <>

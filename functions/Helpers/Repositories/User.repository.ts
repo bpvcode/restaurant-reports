@@ -36,7 +36,6 @@ export const getUserByName = async (name: string) => {
 
     const record = await userTable
         .select({
-            fields: [AirtableUserFields.ID, AirtableUserFields.NAME, AirtableUserFields.ROLES, AirtableUserFields.RESTAURANT_ROLES],
             filterByFormula: `SEARCH("${name}",{name})` // To select when `name` === `name`
         })
         .all()

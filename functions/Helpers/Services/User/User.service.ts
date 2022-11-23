@@ -1,4 +1,5 @@
 import { AddUserDto } from "../../Modals/AddUser.dto"
+import { User } from "../../Modals/User"
 import { addUser, getAllUsers, getUserByName } from "../../Repositories/User.repository"
 import { generateSalt, hashPassword } from "../Authentication/AuthenticationService"
 
@@ -7,7 +8,13 @@ export const getAllUsersService = async () => {
 }
 
 export const getUserByNameService = async (name: string) => {
-   return await getUserByName(name)
+   const user: User = await getUserByName(name)
+   return {
+      id: user.id,
+      name: user.name,
+      roles: user.roles,
+      restaurantRoles: user.restaurantRoles
+   }
 }
 
 export const addUserService = async (addUserDto: AddUserDto) => {

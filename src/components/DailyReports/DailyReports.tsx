@@ -66,7 +66,6 @@ const DailyReports: FC<DailyReportsProps> = ({selectedRestaurant}) => {
     }
 
     const getDailyReportCompleteDone = (bool: boolean) => {
-        console.log("BOOOL : ",  bool)
         setIsDailyReporCompleteDone(bool)
     }
 

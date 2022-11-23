@@ -3,7 +3,6 @@ import styles from './SignIn.module.css'
 import Typical from 'react-typical';
 import { Restaurants, Roles } from "./RolesEnum";
 import { Select, Option } from  "@material-tailwind/react"
-import USERS_MOCK_DATA from './USERS_MOCK_DATA.json'
 import ErrorModal from "../UI/ErrorModal/ErrorModal";
 import axios from "axios";
 
@@ -42,38 +41,38 @@ const SignIn: FC <UserProps> = ({onSignIn}) => {
         setRestaurant(event)
     }
 
-    const verifyUser = (name: string, password: string, restaurant: Restaurants) => {
-        const enteredUser = USERS_MOCK_DATA.find(element => {
-            return element.name === name && element.password === password && element.restaurantRoles.includes(restaurant as Restaurants)
-        })
-        if(enteredUser !== undefined){
-            enteredUser.selectedRestaurant = restaurant
-            setUser(enteredUser as UserModal)
-            onSignIn(enteredUser as UserModal)
-        }else {
+    const verifyUser = async (name: string, password: string, restaurant: Restaurants) => {
+        await axios({
+            // Endpoint to send files
+            url: "/.netlify/functions/SignIn",
+            method: "POST",
+            headers: {
+            //   authorization: "your TOKEN comes here",
+            },
+            data: {name, password, restaurant},
+          }).then((response) => {
+            setUser(response.data)
+            onSignIn(response.data)
+          })
+          .catch((error) => {
             setName('')
             setPassword('')
             setRestaurant(undefined)
+            setUser(undefined)
             setErrorTitle(`Sign In Error`)
             setErrorMessage(`Make sure you input your name and password correct and choose a restaurant that you are allow to see`)
-            return (
-                setIsError(true)
-            )
-        }
+            setIsError(true)
+          })
     }
 
     const onSubmitHandler = (event: any) => {
         event.preventDefault();
         verifyUser(name, password, restaurant as Restaurants)
-        setName('')
-        setPassword('')
-        setRestaurant(undefined)
     }
 
     const onIsErrorHandler = (isError: boolean) => {
         setIsError(isError)
     }
-
 
     return (
         <>

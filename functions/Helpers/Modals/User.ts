@@ -8,4 +8,5 @@ export interface User{
     roles: Roles[],
     restaurantRoles: Restaurants[],
     selectedRestaurant: Restaurants
+    salt: string
 }
