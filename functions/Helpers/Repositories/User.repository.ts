@@ -6,7 +6,7 @@ export const getAllUsers = async () => {
     const userTable = getAirtableTable(AirtableTables.USERS);
     let users: User[] = [];
 
-    const selected = await userTable
+    await userTable
         .select({
         fields: [AirtableUserFields.ID, AirtableUserFields.NAME, AirtableUserFields.ROLES, AirtableUserFields.RESTAURANT_ROLES]
         })
@@ -43,7 +43,7 @@ export const getUserByName = async (name: string) => {
 
     if(record.length === 0) {
         return {
-            statusCode: 400,
+            statusCode: 404,
             body: 'User not found',
             headers: {
             "Access-Control-Allow-Origin": "*",
@@ -56,13 +56,17 @@ export const getUserByName = async (name: string) => {
     return record[0]._rawJson.fields
 }
 
-export const addUser = async (newUser: AddUserDto) => {
+export const addUser = async (newUser: AddUserDto, salt: string, newPassword: string) => {
     const userTable = getAirtableTable(AirtableTables.USERS);
 
     const record = await userTable
         .create([
             {
-                fields: {...newUser}
+                fields: {
+                    ...newUser,
+                    salt,
+                    password: newPassword
+                }
             }
             ],
             {typecast: true} // If typecast is enabled, a new choice will be created if one does not exactly match.
@@ -84,6 +88,6 @@ export const addUser = async (newUser: AddUserDto) => {
         name: record[0].fields.name,
         roles: record[0].fields.roles,
         restaurantRoles: record[0].fields.restaurantRoles,
-        selectedRestaurant: record[0].fields.selectedRestaurant
+        selectedRestaurant: record[0].fields.selectedRestaurant,
     }
 }
