@@ -1,9 +1,12 @@
 import Airtable from "airtable";
 import * as dotenv from "dotenv";
 
+// Airtable tables name
 export enum AirtableTables{
     USERS = 'User',
-    DAILY_REPORT = "Daily Report"
+    DAILY_REPORT = "Daily Report",
+    SHIFT_REPORT = 'Shift Report',
+    PLATFORMS_REPORT = 'Platform Report'
 }
 
 export enum AirtableUserFields{

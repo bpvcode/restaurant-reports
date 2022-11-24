@@ -1,7 +1,7 @@
 import { FC, useState } from 'react'
 import { Restaurants } from '../Authentication/RolesEnum'
 import Clock from './Clock/Clock'
-import DailyDinnerReport, { FinalReport } from './InputForm/DailyDinnerReport'
+import DailyDinnerReport from './InputForm/DailyDinnerReport'
 import DailyLunchReport, { DailyLunch } from './InputForm/DailyLunchReport'
 import { Shifts } from './ShiftEnum'
 import Typical from 'react-typical';
@@ -12,9 +12,10 @@ import axios from 'axios'
 interface DailyReportsProps{
     selectedRestaurant: string;
     user: UserModal;
+    token: string;
 }
 
-interface ShiftReport {
+export interface ShiftReport {
     date: Date,
     shift: Shifts,
     restaurant: Restaurants,
@@ -23,36 +24,40 @@ interface ShiftReport {
     totalRefeicoes: number,
     totalCaixa: number,
     totalMB: number,
-    totalPlataformas: number,
-    totalDespesasExtra: number,
-    totalDinheiroEsperado: number,
-    totalDinheiroReal: number,
+}
+
+export interface PlatformsReport {
+    date: Date;
+    restaurant: Restaurants;
+    totalUber: number;
+    totalBolt: number;
+    totalGlovo: number;
+    totalZomato: number,
 }
 
 export interface DailyReport {
-    lunchReport: DailyLunch;
-    dinnerReport: DailyLunch;
-    finalReport: FinalReport;
+    date: Date;
     restaurant: Restaurants;
+    totalRefeicoes: number;
+    totalCaixa: number;
+    totalMB: number;
+    totalPlataformas: number,
+    totalDespesasExtra: number,
+    totalDinheiroEsperado: number;
+    totalDinheiroReal: number;
+    totalDesvios: number;
 }
 
-const DailyReports: FC<DailyReportsProps> = ({selectedRestaurant, user}) => {
+const DailyReports: FC<DailyReportsProps> = ({selectedRestaurant, user, token}) => {
 
-    const [enteredDailyReport, setEnteredDailyReport] = useState<DailyReport>()
     const [shift, setShift] = useState<Shifts>()
     const [lunchTotalRefeicoes, setLunchTotalRefeicoes] = useState<number>(0)
     const [lunchTotalCaixa, setLunchTotalCaixa] = useState<number>(0)
     const [lunchTotalMB, setLunchTotalMB] = useState<number>(0)
-    const [lunchResponsavel, setLunchResponsavel] = useState<string>('')
-    const [lunchNotas, setLunchNotas] = useState<string>('')
-    const [lunchIsFirstReportDone, setLunchIsFirstReportDone] = useState<boolean>(false)
-    const [lunchCreatedTime, setLunchCreatedTime] = useState<Date>(new Date())
     const [isDailyReportCompleteDone, setIsDailyReportCompleteDone] = useState<boolean>(false)
-
 
     const onSetShift = (shift: Shifts) => {
         // TODO - CHECK IF LUNCH IS ALREADY DONE BEFORE ALLOW DINNER REPORT
-        console.log("SHIFT", shift)
         setShift(shift)
     }
 
@@ -63,26 +68,16 @@ const DailyReports: FC<DailyReportsProps> = ({selectedRestaurant, user}) => {
             restaurant:selectedRestaurant as Restaurants,
             responsavel: dailyLunch.responsavel,
             notas: dailyLunch.notas,
-            totalRefeicoes: lunchTotalRefeicoes,
+            totalRefeicoes: dailyLunch.numeroRefeicoes,
             totalCaixa: dailyLunch.caixa,
             totalMB: dailyLunch.multibanco,
-            totalPlataformas: 0,
-            totalDespesasExtra: 0,
-            totalDinheiroEsperado: 0,
-            totalDinheiroReal: 0,
         }
 
-        //await addShiftReport(report)
-
-        console.log("HELOOOO")
-
+        // TODO = ???????? OR :) useEffect to fetch this data from database? (condition)
         setLunchTotalRefeicoes(dailyLunch.numeroRefeicoes)
         setLunchTotalCaixa(dailyLunch.caixa)
         setLunchTotalMB(dailyLunch.multibanco)
-        setLunchResponsavel(dailyLunch.responsavel)
-        setLunchNotas(dailyLunch.notas)
-        setLunchIsFirstReportDone(dailyLunch.isFirstReportDone)
-        setLunchCreatedTime(dailyLunch.createdTime)
+        await addShiftReport(report)
     }
 
     const addShiftReport = async (shiftReport: ShiftReport) => {
@@ -93,17 +88,12 @@ const DailyReports: FC<DailyReportsProps> = ({selectedRestaurant, user}) => {
             headers: {
             //   authorization: "your TOKEN comes here", // TODO - ADD THIS IMPORTANT !!
             },
-            data: {shiftReport},
+            data: {
+                ...shiftReport,
+                jwtToken : token
+            },
           }).then((response) => {
-            console.log(response)
-
-            // setLunchTotalRefeicoes(dailyLunch.numeroRefeicoes)
-            // setLunchTotalCaixa(dailyLunch.caixa)
-            // setLunchTotalMB(dailyLunch.multibanco)
-            // setLunchResponsavel(dailyLunch.responsavel)
-            // setLunchNotas(dailyLunch.notas)
-            // setLunchIsFirstReportDone(dailyLunch.isFirstReportDone)
-            // setLunchCreatedTime(dailyLunch.createdTime)
+            console.log("HELLO ############ ",response)
           })
           .catch((error) => {
             console.log(error)
@@ -113,14 +103,44 @@ const DailyReports: FC<DailyReportsProps> = ({selectedRestaurant, user}) => {
           })
     }
 
-
-    const dailyReport = (reportFinal: DailyReport) => {
-        const rep: DailyReport = {
-            ...reportFinal,
-            restaurant: selectedRestaurant as Restaurants
+    const dailyReport = async (newDailyReport: DailyReport) => {
+        const report: DailyReport = {
+            date: new Date(),
+            restaurant: newDailyReport.restaurant,
+            totalRefeicoes: newDailyReport.totalRefeicoes,
+            totalCaixa: newDailyReport.totalCaixa,
+            totalMB: newDailyReport.totalMB,
+            totalPlataformas: newDailyReport.totalPlataformas,
+            totalDespesasExtra: newDailyReport.totalDespesasExtra,
+            totalDinheiroEsperado: newDailyReport.totalDinheiroEsperado,
+            totalDinheiroReal: newDailyReport.totalDinheiroReal,
+            totalDesvios: newDailyReport.totalDesvios
         }
-        console.log(rep)
-        setEnteredDailyReport(rep)
+
+        await addDailyReport(report)
+    }
+
+    const addDailyReport = async (newDailyReport: DailyReport) => {
+        await axios({
+            // Endpoint to send files
+            url: "/.netlify/functions/AddDailyReport",
+            method: "POST",
+            headers: {
+            //   authorization: "your TOKEN comes here", // TODO - ADD THIS IMPORTANT !!
+            },
+            data: {
+                ...newDailyReport,
+                jwtToken : token
+            },
+          }).then((response) => {
+            console.log("HELLO ############ ",response)
+          })
+          .catch((error) => {
+            console.log(error)
+            // setErrorTitle(`Sign In Error`)
+            // setErrorMessage(`Make sure you input your name and password correct and choose a restaurant that you are allow to see`)
+            // setIsError(true)
+          })
     }
 
     const getDailyReportCompleteDone = (bool: boolean) => {
@@ -130,7 +150,6 @@ const DailyReports: FC<DailyReportsProps> = ({selectedRestaurant, user}) => {
     return (
         <>
         <Clock onSetShift={onSetShift}/>
-        {/* // TODO: CHANGE BETWEEN `=== Shifts.Lunch` AND `=== Shifts.Dinner` to : */}
 
         { isDailyReportCompleteDone
             ? (
@@ -158,19 +177,20 @@ const DailyReports: FC<DailyReportsProps> = ({selectedRestaurant, user}) => {
                 <>
                 { shift === Shifts.Lunch
                     ? (
-                        <DailyLunchReport getReport={getReport}/>
+                        <DailyLunchReport getReport={getReport} user={user}/>
                     )
                     : (
                         <DailyDinnerReport
                             lunchTotalRefeicoes={lunchTotalRefeicoes}
                             lunchTotalCaixa={lunchTotalCaixa}
                             lunchTotalMB={lunchTotalMB}
-                            lunchResponsavel={lunchResponsavel}
-                            lunchNotas={lunchNotas}
-                            islunchFirstReport={false}
-                            lunchCreatedTime={lunchCreatedTime}
                             dailyReport={dailyReport}
-                            isDailyReportDone={getDailyReportCompleteDone}/>
+                            isDailyReportDone={getDailyReportCompleteDone}
+                            selectedRestaurant={selectedRestaurant as Restaurants}
+                            shift={shift as Shifts}
+                            token={token}
+                            user={user}
+                        />
                     )
                 }
                 </>

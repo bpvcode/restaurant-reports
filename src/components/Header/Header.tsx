@@ -4,34 +4,41 @@ import classNames from "classnames"
 import classnames from "classnames";
 
 
+export enum HeaderSectionEnum {
+    DAILY_REPORT = 'DAILY_REPORT',
+    SCHEDULE = 'SCHEDULE',
+    LOG_OUT = 'LOG_OUT',
+    ADMIN = 'ADMIN',
+}
+
 interface HeaderProps {
     onLogOut: () => void
     title: string
     isAdmin: boolean
+    onHeaderChangeSection: (selectedHeaderSection: HeaderSectionEnum) => void
 }
 
-const Header: FC<HeaderProps> = ({onLogOut, title, isAdmin}) => {
+const Header: FC<HeaderProps> = ({onLogOut, title, isAdmin, onHeaderChangeSection}) => {
 
     const [choosedDailyReport, setchoosedDailyReport] = useState<boolean>(true)
     const [choosedShiftSchedule, setchoosedShiftSchedule] = useState<boolean>(false)
     const [choosedLogOut, setchoosedLogOut] = useState<boolean>(false)
 
     const logOutHandler = () => {
-        setchoosedDailyReport(false)
-        setchoosedShiftSchedule(false)
-        setchoosedLogOut(true)
         onLogOut()
     }
 
     const choosedDailyReportHandler = () => {
-        setchoosedDailyReport(true)
-        setchoosedShiftSchedule(false)
-        setchoosedLogOut(false)
+        console.log("DAILY REPORT")
+        onHeaderChangeSection(HeaderSectionEnum.DAILY_REPORT)
     }
     const choosedShiftScheduleHandler = () => {
-        setchoosedDailyReport(false)
-        setchoosedShiftSchedule(true)
-        setchoosedLogOut(false)
+        console.log("SCHEDULE")
+        onHeaderChangeSection(HeaderSectionEnum.SCHEDULE)
+    }
+    const choosedAdminReportHandler = () => {
+        console.log("ADMIN")
+        onHeaderChangeSection(HeaderSectionEnum.ADMIN)
     }
 
     const toggleMenu = () => {
@@ -62,8 +69,8 @@ const Header: FC<HeaderProps> = ({onLogOut, title, isAdmin}) => {
     <header className="w-full h-16 bg-[#191E29]">
         <div className="container px-4 md:px-0 h-full mx-auto flex justify-between items-center">
             {/* <!-- Logo Here --> */}
-            <a className="text-white text-2xl font-bold" href="https://www.kindacode.com">{title}<span
-                    className="text-[#01C38D]"> Reports</span></a>
+            <a className="text-[#01C38D] text-2xl font-bold" href="https://www.kindacode.com">{title}<span
+                    className="text-white"> Reports</span></a>
 
             {/* <!-- Menu links here --> */}
             <ul id="menu" className="hidden fixed top-0 right-0 px-10 py-16 bg-[#191E29] z-50
@@ -80,12 +87,12 @@ const Header: FC<HeaderProps> = ({onLogOut, title, isAdmin}) => {
                 </li>
                  <li>
                     <a className="text-white hover:text-[#01C38D] duration-150 hover:font-bold" href="#"
-                        onClick={choosedDailyReportHandler}>Schedule</a>
+                        onClick={choosedShiftScheduleHandler}>Schedule</a>
                 </li>
                 { isAdmin &&
                 <li>
                     <a className="text-white hover:text-[#01C38D] duration-150 hover:font-bold" href="#"
-                        onClick={choosedDailyReportHandler}>Admin</a>
+                        onClick={choosedAdminReportHandler}>Admin</a>
                 </li>
                 }
                 <li>

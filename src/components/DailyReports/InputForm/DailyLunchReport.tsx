@@ -1,8 +1,10 @@
 import { FC, useState } from "react";
+import { UserModal } from "../../Authentication/SignIn";
 import styles from './DailyDinnerReport.module.css'
 
 interface DailyLunchReport {
     getReport: (dailyLunch: DailyLunch) => void
+    user: UserModal
 }
 
 export interface DailyLunch {
@@ -15,13 +17,13 @@ export interface DailyLunch {
     createdTime: Date;
 }
 
-const DailyLunchReport: FC<DailyLunchReport> = ({getReport}) => {
+const DailyLunchReport: FC<DailyLunchReport> = ({getReport, user}) => {
 
     const [isFirstReportDone, setIsFirstReportDone] = useState<boolean>(false);
     const [enteredNumeroRefeicoes, setEnteredNumeroRefeicoes] = useState<number>(0);
     const [enteredCaixa, setEnteredCaixa] = useState<number>(0);
     const [enteredMultibanco, setEnteredMultibanco] = useState<number>(0);
-    const [enteredResponsavel, setEnteredResponsavel] = useState<string>('');
+    // const [enteredResponsavel, setEnteredResponsavel] = useState<string>('');
     const [enteredNotas, setEnteredNotas] = useState<string>('');
 
     const enteredNumeroRefeicoesHandler = (event: any) => {
@@ -33,9 +35,9 @@ const DailyLunchReport: FC<DailyLunchReport> = ({getReport}) => {
     const enteredMultibancoHandler = (event: any) => {
         setEnteredMultibanco(event.target.value as number)
     }
-    const enteredResponsavelHandler= (event: any) => {
-        setEnteredResponsavel(event.target.value)
-    }
+    // const enteredResponsavelHandler= (event: any) => {
+    //     setEnteredResponsavel(event.target.value)
+    // }
     const enteredNotasHandler = (event: any) => {
         setEnteredNotas(event.target.value)
     }
@@ -46,7 +48,7 @@ const DailyLunchReport: FC<DailyLunchReport> = ({getReport}) => {
             numeroRefeicoes: enteredNumeroRefeicoes,
             caixa: enteredCaixa,
             multibanco: enteredMultibanco,
-            responsavel: enteredResponsavel,
+            responsavel: user.name,
             notas: enteredNotas,
             isFirstReportDone: true,
             createdTime: new Date(),
@@ -56,7 +58,7 @@ const DailyLunchReport: FC<DailyLunchReport> = ({getReport}) => {
         setEnteredNumeroRefeicoes(0)
         setEnteredCaixa(0)
         setEnteredMultibanco(0)
-        setEnteredResponsavel('')
+        // setEnteredResponsavel('')
         setEnteredNotas('')
         setIsFirstReportDone(true)
     }
@@ -79,13 +81,13 @@ const DailyLunchReport: FC<DailyLunchReport> = ({getReport}) => {
                                     </div>
                                     <div className="py-1">
                                         <span className="px-1 text-sm text-[#696E79]">Caixa</span>
-                                        <input placeholder="Caixa" type="number" min={0} onChange={enteredCaixaHandler}
+                                        <input placeholder="Caixa" type="number" min={0} step={.01} onChange={enteredCaixaHandler}
                                             className="text-md block px-3 py-2 rounded-lg w-full
                                             bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"/>
                                     </div>
                                     <div className="py-1">
                                         <span className="px-1 text-sm text-[#696E79]">MB</span>
-                                        <input placeholder="MB" type="number" min={0} onChange={enteredMultibancoHandler}
+                                        <input placeholder="MB" type="number" min={0} step={.01} onChange={enteredMultibancoHandler}
                                             className="text-md block px-3 py-2 rounded-lg w-full
                                             bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"/>
                                     </div>
@@ -93,15 +95,15 @@ const DailyLunchReport: FC<DailyLunchReport> = ({getReport}) => {
                                 <span className="px-1 text-sm text-white">STAFF INFO</span>
                                     <div className="py-1">
                                         <span className="px-1 text-sm text-[#696E79]">Responsável</span>
-                                        <input placeholder="Nome da pessoa que regista" type="text" onChange={enteredResponsavelHandler}
+                                        <input placeholder="Nome da pessoa que regista" type="text" value={user.name} disabled={true}
                                             className="text-md block px-3 py-2 rounded-lg w-full
-                                            bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"/>
+                                            bg-[#696E79] border-2 border-gray-white placeholder-white text-white shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"/>
                                     </div>
                                     <div className="py-1">
                                         <span className="px-1 text-sm text-[#696E79]">Notas</span>
-                                        <input placeholder="Notas" type="text" onChange={enteredNotasHandler}
-                                            className="text-md block px-3 py-2 rounded-lg w-full
-                                            bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"/>
+                                        <textarea placeholder="Notas" onChange={enteredNotasHandler}
+                                            className="text-md block px-3 py-12 rounded-lg w-full
+                                            bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"></textarea>
                                     </div>
                                     <button className="mt-8 mb-6 text-lg font-semibold
                                         bg-[#01C38D] w-full text-white rounded-lg
