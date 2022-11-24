@@ -135,7 +135,7 @@ const DailyDinnerReport: FC<DailyDinnerReportProps> = ({lunchTotalRefeicoes, lun
             (<DailyLunchReport getReport={getReport}/>)
             :
             (
-            <div className="max-w-sm mx-auto px-6">
+            <div className="max-w-sm mx-auto px-3">
                 <div className="relative flex flex-wrap">
                     <div className="w-full relative">
                         <div className="md:mt-6">

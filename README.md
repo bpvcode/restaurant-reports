@@ -63,6 +63,7 @@ Link your local repository with netlify and deploy all stack from local to remot
 
 ### Environment variables to set
 
+- JWT_SECRET
 - AIRTABLE_API_KEY
 - AIRTABLE_BASE_ID
 - AIRTABLE_USER_TABLE_ID

@@ -12,7 +12,8 @@ export interface UserModal {
     password: string,
     roles: Roles[],
     restaurantRoles: Restaurants[],
-    selectedRestaurant: string
+    selectedRestaurant: string,
+    jwtToken: string
 }
 
 interface UserProps{

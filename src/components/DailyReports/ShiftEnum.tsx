@@ -1,4 +1,4 @@
 export enum Shifts{
-    Lunch = "Lunch",
-    Dinner = "Dinner"
+    Lunch = "LUNCH",
+    Dinner = "DINNER"
 }
