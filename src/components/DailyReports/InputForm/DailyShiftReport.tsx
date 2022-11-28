@@ -2,12 +2,12 @@ import { FC, useState } from "react";
 import { UserModal } from "../../Authentication/SignIn";
 import styles from './DailyDinnerReport.module.css'
 
-interface DailyLunchReport {
-    getReport: (dailyLunch: DailyLunch) => void
+interface DailyShiftReport {
+    getReport: (dailyLunch: DailyShift) => void
     user: UserModal
 }
 
-export interface DailyLunch {
+export interface DailyShift {
     numeroRefeicoes: number;
     caixa: number;
     multibanco: number;
@@ -17,7 +17,7 @@ export interface DailyLunch {
     createdTime: Date;
 }
 
-const DailyLunchReport: FC<DailyLunchReport> = ({getReport, user}) => {
+const DailyShiftReport: FC<DailyShiftReport> = ({getReport, user}) => {
 
     const [isFirstReportDone, setIsFirstReportDone] = useState<boolean>(false);
     const [enteredNumeroRefeicoes, setEnteredNumeroRefeicoes] = useState<number>(0);
@@ -40,7 +40,7 @@ const DailyLunchReport: FC<DailyLunchReport> = ({getReport, user}) => {
 
     const onSubmit = (event: any) => {
         event.preventDefault();
-        const report: DailyLunch = {
+        const report: DailyShift = {
             numeroRefeicoes: enteredNumeroRefeicoes,
             caixa: enteredCaixa,
             multibanco: enteredMultibanco,
@@ -116,4 +116,4 @@ const DailyLunchReport: FC<DailyLunchReport> = ({getReport, user}) => {
     )
 }
 
-export default DailyLunchReport
+export default DailyShiftReport

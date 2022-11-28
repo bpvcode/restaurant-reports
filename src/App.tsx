@@ -29,11 +29,8 @@ const App = () => {
   }
 
   const onHeaderChangeSection = (event: any) => {
-    console.log(event);
-    setSelectHeaderSection(event.headerSection)
+    setSelectHeaderSection(event)
   }
-
-  console.log(selectedHeaderSection)
 
   return (
     <div className="App font-sans">
@@ -41,18 +38,15 @@ const App = () => {
       { user &&
       <>
         <Header onLogOut={onLogOut} title={selectedRestaurant} isAdmin= {isAdmin} onHeaderChangeSection={onHeaderChangeSection}/>
-          {/* { selectedHeaderSection === HeaderSectionEnum.DAILY_REPORT */}
-            {/* && */}
-             <DailyReports selectedRestaurant={selectedRestaurant} user={user} token={token} />
-          {/* } */}
-          {/* { selectedHeaderSection === HeaderSectionEnum.SCHEDULE */}
-            {/* && */}
-            <h2 style={{color: "white"}}> ######## SCHEDULE !!!! ######## </h2>
-          {/* } */}
-          {/* { selectedHeaderSection === HeaderSectionEnum.ADMIN */}
-            {/* && */}
-            <h2 style={{color: "white"}}> ######## ADMIN !!!! ######## </h2>
-          {/* } */}
+          { selectedHeaderSection === HeaderSectionEnum.DAILY_REPORT
+            && <DailyReports selectedRestaurant={selectedRestaurant} user={user} token={token} />
+          }
+          { selectedHeaderSection === HeaderSectionEnum.SCHEDULE
+            && <h2 style={{color: "white"}}> ######## SCHEDULE !!!! ######## </h2>
+          }
+          { selectedHeaderSection === HeaderSectionEnum.ADMIN
+            && <h2 style={{color: "white"}}> ######## ADMIN !!!! ######## </h2>
+          }
         <Footer/>
       </>
       }

@@ -2,7 +2,7 @@ import { FC, useState } from 'react'
 import { Restaurants } from '../Authentication/RolesEnum'
 import Clock from './Clock/Clock'
 import DailyDinnerReport from './InputForm/DailyDinnerReport'
-import DailyLunchReport, { DailyLunch } from './InputForm/DailyLunchReport'
+import DailyShiftReport, { DailyShift } from './InputForm/DailyShiftReport'
 import { Shifts } from './ShiftEnum'
 import Typical from 'react-typical';
 import styles from './DailyReports.module.css'
@@ -61,7 +61,7 @@ const DailyReports: FC<DailyReportsProps> = ({selectedRestaurant, user, token}) 
         setShift(shift)
     }
 
-    const getReport = async (dailyLunch: DailyLunch) => {
+    const getReport = async (dailyLunch: DailyShift) => {
         const report: ShiftReport = {
             date: dailyLunch.createdTime,
             shift: shift as Shifts,
@@ -177,7 +177,7 @@ const DailyReports: FC<DailyReportsProps> = ({selectedRestaurant, user, token}) 
                 <>
                 { shift === Shifts.Lunch
                     ? (
-                        <DailyLunchReport getReport={getReport} user={user}/>
+                        <DailyShiftReport getReport={getReport} user={user}/>
                     )
                     : (
                         <DailyDinnerReport

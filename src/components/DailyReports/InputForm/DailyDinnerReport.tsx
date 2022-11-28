@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import DailyLunchReport, { DailyLunch } from "./DailyLunchReport";
+import DailyShiftReport, { DailyShift } from "./DailyShiftReport";
 import styles from './DailyDinnerReport.module.css'
 import { DailyReport, PlatformsReport, ShiftReport } from "../DailyReports";
 import { Restaurants } from "../../Authentication/RolesEnum";
@@ -55,7 +55,7 @@ const DailyDinnerReport: FC<DailyDinnerReportProps> = ({lunchTotalRefeicoes, lun
         setTotalDesvios(totalDinheiroReal - totalDinheiroEsperado)
     }
 
-    const getReport = async (dailyLunch: DailyLunch) => {
+    const getReport = async (dailyLunch: DailyShift) => {
         const report: ShiftReport = {
             date: dailyLunch.createdTime,
             shift: shift as Shifts,
@@ -188,7 +188,7 @@ const DailyDinnerReport: FC<DailyDinnerReportProps> = ({lunchTotalRefeicoes, lun
     return (
         <>
         {isDinnerFirstReport ?
-            (<DailyLunchReport getReport={getReport} user={user}/>)
+            (<DailyShiftReport getReport={getReport} user={user}/>)
             :
             (
             <div className="max-w-sm mx-auto px-3">
