@@ -23,7 +23,6 @@ const DailyLunchReport: FC<DailyLunchReport> = ({getReport, user}) => {
     const [enteredNumeroRefeicoes, setEnteredNumeroRefeicoes] = useState<number>(0);
     const [enteredCaixa, setEnteredCaixa] = useState<number>(0);
     const [enteredMultibanco, setEnteredMultibanco] = useState<number>(0);
-    // const [enteredResponsavel, setEnteredResponsavel] = useState<string>('');
     const [enteredNotas, setEnteredNotas] = useState<string>('');
 
     const enteredNumeroRefeicoesHandler = (event: any) => {
@@ -35,9 +34,6 @@ const DailyLunchReport: FC<DailyLunchReport> = ({getReport, user}) => {
     const enteredMultibancoHandler = (event: any) => {
         setEnteredMultibanco(event.target.value as number)
     }
-    // const enteredResponsavelHandler= (event: any) => {
-    //     setEnteredResponsavel(event.target.value)
-    // }
     const enteredNotasHandler = (event: any) => {
         setEnteredNotas(event.target.value)
     }

@@ -69,7 +69,7 @@ const Header: FC<HeaderProps> = ({onLogOut, title, isAdmin, onHeaderChangeSectio
     <header className="w-full h-16 bg-[#191E29]">
         <div className="container px-4 md:px-0 h-full mx-auto flex justify-between items-center">
             {/* <!-- Logo Here --> */}
-            <a className="text-[#01C38D] text-2xl font-bold" href="https://www.kindacode.com">{title}<span
+            <a className="text-[#01C38D] text-2xl font-bold" href="">{title}<span
                     className="text-white"> Reports</span></a>
 
             {/* <!-- Menu links here --> */}

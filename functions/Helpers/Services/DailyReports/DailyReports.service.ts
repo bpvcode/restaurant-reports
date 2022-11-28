@@ -19,7 +19,6 @@ export const addDailyReportService = async (addDailyReportDto: DailyReport) => {
     console.log(JSON.stringify(addDailyReportDto))
     const dailyReport = await addDailyReport(addDailyReportDto)
 
-    console.log('SERVICE ### ' , dailyReport)
     return {
         dailyReport
     }

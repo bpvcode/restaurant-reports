@@ -52,8 +52,9 @@ const SignIn: FC <UserProps> = ({onSignIn}) => {
             },
             data: {name, password, restaurant},
           }).then((response) => {
-            setUser(response.data)
-            onSignIn(response.data)
+            const user = { ...response.data , selectedRestaurant: restaurant}
+            setUser(user)
+            onSignIn(user)
           })
           .catch((error) => {
             setName('')
